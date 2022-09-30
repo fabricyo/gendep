@@ -98,7 +98,6 @@
                     console.log(err);
                     return
                 }
-
                 console.log("Initialization finished. Ready to start");
                 Quagga.start();
 
