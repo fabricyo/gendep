@@ -33,7 +33,7 @@
                     <input type="text" class="form-control" id="barcode" name="barcode">
                     <button type="button" class="btn btn-info mt-2" id="btn_barcode">Ler <i class="fa-solid fa-barcode"></i></button>
                     <div id="barcode-scanner" class="mt-2">
-                        <video src="" playsinline></video>
+                        <video src="" playsinline autoplay></video>
                         <canvas class="drawingBuffer" id="drawingBuffer"></canvas>
                     </div>
                 </div>
