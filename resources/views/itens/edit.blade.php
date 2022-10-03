@@ -17,27 +17,28 @@
         </div>
     @endif
     <div class="container-fluid">
-        <form method="POST" action="{{route('store')}}" class="row">
+        <form method="POST" action="{{route('update')}}" class="row">
             @csrf
+            <input value="{{$item->id}}" name="id" hidden>
             <div class="col-12 col-md-6 mb-3">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="Arroz" required>
+                <input type="text" class="form-control" id="nome" name="nome" value="{{$item->nome}}">
             </div>
             <div class="col-12 col-md-6 mb-3">
                 <label for="marca" class="form-label">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca" placeholder="Tio João" required>
+                <input type="text" class="form-control" id="marca" name="marca" value="{{$item->marca}}">
             </div>
             <div class="col-12 col-md-6 mb-3">
                 <label for="categoria" class="form-label">Categoria</label>
-                <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Alimentação" required>
+                <input type="text" class="form-control" id="categoria" name="categoria" value="{{$item->categoria}}">
             </div>
             <div class="col-12 col-md-6 mb-3">
                 <label for="local" class="form-label">Local</label>
-                <input type="text" class="form-control" id="local" name="local" placeholder="A - 2">
+                <input type="text" class="form-control" id="local" name="local" value="{{$item->local}}">
             </div>
             <div class="col-12 col-md-8 mb-3 mx-auto">
                 <label for="barcode" class="form-label">Código de barras</label>
-                <input type="number" class="form-control" id="barcode" name="barcode">
+                <input type="text" class="form-control" id="barcode" name="barcode" value="{{$item->barcode}}">
                 <button type="button" class="btn btn-info mt-2" id="btn_barcode">Ler <i class="fa-solid fa-barcode"></i></button>
                 <div id="barcode-scanner" class="mt-2">
                     <video src="" playsinline autoplay></video>
@@ -46,16 +47,18 @@
             </div>
             <div class="col-12 col-md-6 mb-3">
                 <label for="entrada" class="form-label">Entrada</label>
-                <input type="datetime-local" class="form-control" id="entrada" name="entrada" value="{{date('Y-m-d H:i')}}" required>
+                <input type="datetime-local" class="form-control" id="entrada" name="entrada" value="{{$item->entrada}}">
+            </div>
+            <div class="col-12 col-md-6 mb-3">
+                <label for="saida" class="form-label">Saída</label>
+                <input type="datetime-local" class="form-control" id="saida" name="saida" value="{{$item->saida}}">
             </div>
             <div class="col-12 col-md-6 mb-3">
                 <label for="validade" class="form-label">Validade</label>
-                <input type="date" class="form-control" id="validade" name="validade" required>
+                <input type="date" class="form-control" id="validade" name="validade" value="{{$item->validade}}">
             </div>
 
-            <div class="col-12 text-center mt-3">
-                <button type="submit" class="btn btn-success">Salvar <i class="fa-solid fa-plus"></i></button>
-            </div>
+            <button type="submit" class="btn btn-primary">Salvar alterações</button>
         </form>
     </div>
     <style>

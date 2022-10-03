@@ -16,13 +16,16 @@ class CreateItensTable extends Migration
         Schema::create('itens', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('marca');
+            $table->string('categoria');
             $table->string('local');
             $table->string('barcode');
-            $table->date('entrada');
-            $table->date('saida')->nullable();
+            $table->dateTime('entrada');
+            $table->dateTime('saida')->nullable();
             $table->date('validade');
             $table->timestamps();
         });
+
     }
 
     /**

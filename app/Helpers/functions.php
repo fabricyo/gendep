@@ -19,3 +19,11 @@ function dateSwap(string $date): string
         die("<code>Formato de data inválido para a função dateSwap <i>$date</i></code>");
     }
 }
+
+function daysLeft(string $date) : string{
+    $now = time();
+    if (strtotime($date) < $now)
+        return '<span class="text-danger">Vencido</span>';
+    $timeleft = strtotime($date) - $now;
+    return round((($timeleft/24)/60)/60) . " dias";
+}

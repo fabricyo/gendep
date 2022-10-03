@@ -1,10 +1,2 @@
-
-.idea/gendep.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/php.xml
-.idea/phpunit.xml
-.idea/vcs.xml
-.idea/workspace.xml
-.idea/commandlinetools/Laravel_29_09_2022_18_23.xml
-.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd
+.idea/*
+.env

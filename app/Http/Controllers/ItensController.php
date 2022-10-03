@@ -39,19 +39,23 @@ class ItensController extends Controller
         $request->validate([
             'nome' => 'required',
             'local' => 'required',
+            'marca' => 'required',
+            'categoria' => 'required',
         ]);
 
         $request_data = $request->all();
 
-        Item::create([
+        $create = Item::create([
             'nome' => $request_data['nome'],
             'local' => $request_data['local'],
+            'marca' => $request_data['marca'],
+            'categoria' => $request_data['categoria'],
             'barcode' => $request_data['barcode'],
             'entrada' => $request_data['entrada'],
             'validade' => $request_data['validade'],
         ]);
 
-        return redirect()->route('index')->with('success', 'Item adicionado com sucesso');
+        return redirect()->route('show', $create->id);
     }
 
     /**
@@ -72,8 +76,9 @@ class ItensController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit(Request $request)
     {
+        $item = Item::find($request->keys()[0]);
         return view('itens.edit', compact('item'));
     }
 
@@ -84,14 +89,22 @@ class ItensController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request)
     {
         $request->validate([
             'nome' => 'required',
             'local' => 'required',
         ]);
-        $item->update($request->all());
-        return redirect()->route('index')->with('success','Item atualizado com sucesso');
+        $item = Item::find($request->input('id'));
+        $item->update($request->except('id'));
+        return redirect()->route('show', $item->id);
+    }
+
+    public function checkout(Request $request)
+    {
+        $item = Item::find($request->keys()[0]);
+        $item->update(['saida' => now()]);
+        return redirect()->route('show', $item->id);;
     }
 
     /**
@@ -100,9 +113,10 @@ class ItensController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(Request $request)
     {
+        $item = Item::find($request->keys()[0]);
         $item->delete();
-        return redirect()->route('index')->with('success', 'Item apagado');
+        return redirect()->route('index');
     }
 }

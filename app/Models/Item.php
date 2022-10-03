@@ -11,6 +11,6 @@ class Item extends Model
     protected $table = 'itens';
 
     protected $fillable = [
-        'nome', 'local', 'barcode', 'entrada', 'saida', 'validade'
+        'nome', 'marca', 'categoria', 'local', 'barcode', 'entrada', 'saida', 'validade'
     ];
 }

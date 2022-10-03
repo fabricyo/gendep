@@ -1,0 +1,31 @@
+.dt-button {
+    color: white !important;
+    padding: .7rem;
+    border: none !important;
+    border-radius: .5rem;
+}
+
+.buttons-excel {
+    background-color: #00a65a !important;
+    color: white!important;
+}
+
+.buttons-pdf {
+    background-color: red !important;
+}
+
+.dt-buttons {
+    float: right !important;
+
+}
+
+.dataTables_filter {
+    float: left !important;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+    /*padding: .7rem 1rem;*/
+    /*width: 25rem !important;*/
+    margin: .5rem 0;
+}
+
