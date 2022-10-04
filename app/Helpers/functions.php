@@ -1,4 +1,13 @@
 <?php
+
+function d($param, bool $die = TRUE): bool
+{
+    echo '<pre>';
+    var_dump($param);
+    echo '</pre>';
+    return $die ? die('<code>>__ Execução do PHP interrompida</code>') : TRUE;
+}
+
 /**
  * Troca o padrão da data para sql ou ptBr, dependendo do que for passado
  *

@@ -26,7 +26,12 @@ class ItensController extends Controller
      */
     public function create()
     {
-        return view('itens.create');
+        $nome = Item::select('nome')->distinct()->get()->toArray();
+        $marca = Item::select('marca')->distinct()->get()->toArray();
+        $categoria = Item::select('categoria')->distinct()->get()->toArray();
+        $local = Item::select('local')->distinct()->get()->toArray();
+        return view('itens.create', ['nome' => json_encode($nome), 'marca' => json_encode($marca),
+            'categoria' => json_encode($categoria), 'local' => json_encode($local)]);
     }
 
     /**

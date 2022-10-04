@@ -20,24 +20,33 @@
         <form method="POST" action="{{route('store')}}" class="row">
             @csrf
             <div class="col-12 col-md-6 mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="Arroz" required>
+                <div class="auto-search-wrapper">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" id="nome" name="nome" class="form-control" autocomplete="off"/>
+                </div>
             </div>
             <div class="col-12 col-md-6 mb-3">
                 <label for="qtd" class="form-label">Quantidade</label>
-                <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" id="qtd" name="qtd" placeholder="23" required>
+                <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" id="qtd"
+                       name="qtd" placeholder="23" autocomplete="off" required>
             </div>
             <div class="col-12 col-md-6 mb-3">
-                <label for="marca" class="form-label">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca" placeholder="Tio João" required>
+                <div class="auto-search-wrapper">
+                    <label for="marca" class="form-label">Marca</label>
+                    <input type="text" class="form-control" id="marca" name="marca" autocomplete="off" required>
+                </div>
             </div>
             <div class="col-12 col-md-6 mb-3">
-                <label for="categoria" class="form-label">Categoria</label>
-                <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Alimentação" required>
+                <div class="auto-search-wrapper">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <input type="text" class="form-control" id="categoria" name="categoria" autocomplete="off" required>
+                </div>
             </div>
             <div class="col-12 col-md-6 mb-3">
-                <label for="local" class="form-label">Local</label>
-                <input type="text" class="form-control" id="local" name="local" placeholder="A - 2">
+                <div class="auto-search-wrapper">
+                    <label for="local" class="form-label">Local</label>
+                    <input type="text" class="form-control" id="local" name="local" autocomplete="off" >
+                </div>
             </div>
             <div class="col-12 col-md-8 mb-3 mx-auto">
                 <label for="barcode" class="form-label">Código de barras</label>
@@ -73,8 +82,83 @@
         }
     </style>
 @endsection
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tomik23/autocomplete@1.8.5/dist/css/autocomplete.min.css"/>
+<style>
+    .auto-search-wrapper input{
+        padding: .2rem .75rem;
+        border: 1px solid #bdbdbd;
+    }
+    .auto-clear{
+        padding-top: 2.3rem;
+    }
+</style>
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.js"></script>
     <script src="{{url('js/barcodeScanner.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tomik23/autocomplete@1.8.5/dist/js/autocomplete.min.js"></script>
+    <script>
+        window.addEventListener('load', function(){
+            //Nome
+            new Autocomplete('nome', {
+                onSearch: ({ currentValue }) => {
+                    const data = JSON.parse(`{!! $nome!!}`);
+                    return data.sort((a, b) => a.nome.localeCompare(b.nome))
+                        .filter((element) => {
+                            return element.nome.match(new RegExp(currentValue, 'i'));
+                        });
+                },
+                onResults: ({ matches }) => {
+                    return matches.map((el) => {
+                            return `<li>${el.nome}</li>`;
+                        }).join('');
+                },
+            });
+            //Marca
+            new Autocomplete('marca', {
+                onSearch: ({ currentValue }) => {
+                    const data = JSON.parse(`{!! $marca!!}`);
+                    return data.sort((a, b) => a.marca.localeCompare(b.marca))
+                        .filter((element) => {
+                            return element.marca.match(new RegExp(currentValue, 'i'));
+                        });
+                },
+                onResults: ({ matches }) => {
+                    return matches.map((el) => {
+                            return `<li>${el.marca}</li>`;
+                        }).join('');
+                },
+            });
+            //Categoria
+            new Autocomplete('categoria', {
+                onSearch: ({ currentValue }) => {
+                    const data = JSON.parse(`{!! $categoria!!}`);
+                    return data.sort((a, b) => a.categoria.localeCompare(b.categoria))
+                        .filter((element) => {
+                            return element.categoria.match(new RegExp(currentValue, 'i'));
+                        });
+                },
+                onResults: ({ matches }) => {
+                    return matches.map((el) => {
+                            return `<li>${el.categoria}</li>`;
+                        }).join('');
+                },
+            });
+
+            //Categoria
+            new Autocomplete('local', {
+                onSearch: ({ currentValue }) => {
+                    const data = JSON.parse(`{!! $local!!}`);
+                    return data.sort((a, b) => a.local.localeCompare(b.local))
+                        .filter((element) => {
+                            return element.local.match(new RegExp(currentValue, 'i'));
+                        });
+                },
+                onResults: ({ matches }) => {
+                    return matches.map((el) => {
+                            return `<li>${el.local}</li>`;
+                        }).join('');
+                },
+            });
+        });
+    </script>
 @endsection
