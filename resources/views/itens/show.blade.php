@@ -57,7 +57,7 @@
                 </div>
                 <div class="modal-body">
                     <label for="nome" class="form-label">Quantidade</label>
-                    <input type="number" class="form-control" id="qtd" name="qtd" placeholder="12" required>
+                    <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" id="qtd" name="qtd" placeholder="12" required>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Cancelar</button>

@@ -48,12 +48,18 @@ class ItensController extends Controller
 
         $create = Item::create([
             'nome' => $request_data['nome'],
+            'qtd' => $request_data['qtd'],
             'local' => $request_data['local'],
             'marca' => $request_data['marca'],
             'categoria' => $request_data['categoria'],
             'barcode' => $request_data['barcode'],
             'entrada' => $request_data['entrada'],
             'validade' => $request_data['validade'],
+        ]);
+        $fluxo = Fluxo::create([
+            'id_item' => $create->id,
+            'qtd' => $create->qtd,
+            'tipo' => 0
         ]);
 
         return redirect()->route('show', $create->id);

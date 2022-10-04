@@ -24,6 +24,10 @@
                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Arroz" required>
             </div>
             <div class="col-12 col-md-6 mb-3">
+                <label for="qtd" class="form-label">Quantidade</label>
+                <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" id="qtd" name="qtd" placeholder="23" required>
+            </div>
+            <div class="col-12 col-md-6 mb-3">
                 <label for="marca" class="form-label">Marca</label>
                 <input type="text" class="form-control" id="marca" name="marca" placeholder="Tio João" required>
             </div>

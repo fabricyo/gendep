@@ -26,7 +26,7 @@
             </div>
             <div class="col-12 col-md-2 mb-3">
                 <label for="qtd" class="form-label">Quantidade</label>
-                <input type="text" class="form-control" id="qtd" name="qtd" value="{{$item->qtd}}">
+                <input type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" id="qtd" name="qtd" value="{{$item->qtd}}">
             </div>
             <div class="col-12 col-md-4 mb-3">
                 <label for="local" class="form-label">Local</label>
