@@ -113,8 +113,13 @@ class ItensController extends Controller
         $item = Item::find($request->input('i'));
         $t = $request->input('t');
         $q = $request->input('q');
-        $item->qtd = $t == 's' ? $item->qtd - $q : $item->qtd + $q;
-        $item->update(['saida' => now()]);
+        if ($t == 's'){
+            $item->qtd = $item->qtd - $q;
+            $item->update(['saida' => now()]);
+        }else{
+            $item->qtd = $item->qtd + $q;
+            $item->update(['entrada' => now()]);
+        }
         $fluxo = Fluxo::create([
             'id_item' => $item->id,
             'qtd' => $q,
