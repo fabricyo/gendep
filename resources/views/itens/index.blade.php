@@ -84,7 +84,7 @@
             if (selected === 'option0')
                 return true;
             let dias = parseInt(selected.slice(7));
-            let dias_restantes = parseInt(data[5].slice(12).split(" ")[0]);
+            let dias_restantes = parseInt(data[5].slice(78).split(" ")[0]);
             dias_restantes = isNaN(dias_restantes) ? -1 : dias_restantes;
             return dias_restantes >= 0 && dias_restantes <= dias;
 
