@@ -14,7 +14,7 @@ class ItensController extends Controller
      */
     public function index()
     {
-        $data['itens'] = Item::paginate(10);
+        $data['itens'] = Item::get();
         return view('itens.index')->with($data);
     }
 

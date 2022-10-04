@@ -57,8 +57,9 @@
                 <label for="validade" class="form-label">Validade</label>
                 <input type="date" class="form-control" id="validade" name="validade" value="{{$item->validade}}">
             </div>
-
-            <button type="submit" class="btn btn-primary">Salvar alterações</button>
+            <div class="col-12 text-center mt-3">
+                <button type="submit" class="btn btn-success">Salvar alterações <i class="fa-solid fa-file-pen"></i></button>
+            </div>
         </form>
     </div>
     <style>
