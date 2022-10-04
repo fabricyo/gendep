@@ -24,6 +24,14 @@
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" value="{{$item->nome}}">
             </div>
+            <div class="col-12 col-md-2 mb-3">
+                <label for="qtd" class="form-label">Quantidade</label>
+                <input type="text" class="form-control" id="qtd" name="qtd" value="{{$item->qtd}}">
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+                <label for="local" class="form-label">Local</label>
+                <input type="text" class="form-control" id="local" name="local" value="{{$item->local}}">
+            </div>
             <div class="col-12 col-md-6 mb-3">
                 <label for="marca" class="form-label">Marca</label>
                 <input type="text" class="form-control" id="marca" name="marca" value="{{$item->marca}}">
@@ -31,10 +39,6 @@
             <div class="col-12 col-md-6 mb-3">
                 <label for="categoria" class="form-label">Categoria</label>
                 <input type="text" class="form-control" id="categoria" name="categoria" value="{{$item->categoria}}">
-            </div>
-            <div class="col-12 col-md-6 mb-3">
-                <label for="local" class="form-label">Local</label>
-                <input type="text" class="form-control" id="local" name="local" value="{{$item->local}}">
             </div>
             <div class="col-12 col-md-8 mb-3 mx-auto">
                 <label for="barcode" class="form-label">Código de barras</label>
@@ -50,7 +54,7 @@
                 <input type="datetime-local" class="form-control" id="entrada" name="entrada" value="{{$item->entrada}}">
             </div>
             <div class="col-12 col-md-6 mb-3">
-                <label for="saida" class="form-label">Saída</label>
+                <label for="saida" class="form-label">Útima saída</label>
                 <input type="datetime-local" class="form-control" id="saida" name="saida" value="{{$item->saida}}">
             </div>
             <div class="col-12 col-md-6 mb-3">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fluxo;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -67,7 +68,8 @@ class ItensController extends Controller
     public function show(Request $request)
     {
         $item = Item::find($request->keys()[0]);
-        return view('itens.show', compact('item'));
+        $fluxo = Fluxo::where('id_item', $item->id)->get();
+        return view('itens.show', ['item' => $item, 'fluxo' => $fluxo]);
     }
 
     /**
@@ -100,11 +102,20 @@ class ItensController extends Controller
         return redirect()->route('show', $item->id);
     }
 
-    public function checkout(Request $request)
+    public function fluxo(Request $request)
     {
-        $item = Item::find($request->keys()[0]);
+        $item = Item::find($request->input('i'));
+        $t = $request->input('t');
+        $q = $request->input('q');
+        $item->qtd = $t == 's' ? $item->qtd - $q : $item->qtd + $q;
         $item->update(['saida' => now()]);
-        return redirect()->route('show', $item->id);;
+        $fluxo = Fluxo::create([
+            'id_item' => $item->id,
+            'qtd' => $q,
+            'tipo' => $t == 's'
+        ]);
+
+        return redirect()->route('show', $item->id);
     }
 
     /**
@@ -116,6 +127,7 @@ class ItensController extends Controller
     public function destroy(Request $request)
     {
         $item = Item::find($request->keys()[0]);
+        Fluxo::where('id_item', $item->id)->delete();
         $item->delete();
         return redirect()->route('index');
     }

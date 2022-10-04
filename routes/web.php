@@ -20,4 +20,4 @@ Route::get('/destroy', [ItensController::class , 'destroy'])->name('destroy');
 Route::get('/show', [ItensController::class , 'show'])->name('show');
 Route::get('/edit', [ItensController::class , 'edit'])->name('edit');
 Route::post('/update', [ItensController::class , 'update'])->name('update');
-Route::get('/checkout', [ItensController::class , 'checkout'])->name('checkout');
+Route::get('/fluxo', [ItensController::class , 'fluxo'])->name('fluxo');

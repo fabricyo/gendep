@@ -22,6 +22,7 @@ class CreateItensTable extends Migration
             $table->string('barcode');
             $table->dateTime('entrada');
             $table->dateTime('saida')->nullable();
+            $table->integer('qtd')->default(0);
             $table->date('validade');
             $table->timestamps();
         });

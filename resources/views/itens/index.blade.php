@@ -37,7 +37,7 @@
             <tbody>
                 @foreach($itens as $i)
                     <tr>
-                        <td><a href="{{ route('show', $i->id) }}">{{$i->nome}}</a></td>
+                        <td><a href="{{ route('show', $i->id) }}">{{$i->nome}} ({{$i->qtd}})</a></td>
                         <td>{{$i->local}}</td>
                         <td>{{$i->marca}}</td>
                         <td>{{$i->categoria}}</td>
@@ -87,7 +87,6 @@
             let dias_restantes = parseInt(data[5].slice(78).split(" ")[0]);
             dias_restantes = isNaN(dias_restantes) ? -1 : dias_restantes;
             return dias_restantes >= 0 && dias_restantes <= dias;
-
         });
 
     });
