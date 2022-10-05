@@ -15,8 +15,14 @@ class ItensController extends Controller
      */
     public function index()
     {
-        $data['itens'] = Item::get();
+        $data['itens'] = Item::where('ativo', 1)->get();
         return view('itens.index')->with($data);
+    }
+
+    public function inativos()
+    {
+        $data['itens'] = Item::where('ativo', 0)->get();
+        return view('itens.inativos')->with($data);
     }
 
     /**
@@ -24,13 +30,18 @@ class ItensController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if(sizeof($request->keys()) == 1)
+            $item = Item::find($request->keys()[0]);
+        else
+            $item = false;
+
         $nome = Item::select('nome')->distinct()->get()->toArray();
         $marca = Item::select('marca')->distinct()->get()->toArray();
         $categoria = Item::select('categoria')->distinct()->get()->toArray();
         $local = Item::select('local')->distinct()->get()->toArray();
-        return view('itens.create', ['nome' => json_encode($nome), 'marca' => json_encode($marca),
+        return view('itens.create', ['item' => $item, 'nome' => json_encode($nome), 'marca' => json_encode($marca),
             'categoria' => json_encode($categoria), 'local' => json_encode($local)]);
     }
 
@@ -145,6 +156,13 @@ class ItensController extends Controller
         $item = Item::find($request->keys()[0]);
         Fluxo::where('id_item', $item->id)->delete();
         $item->delete();
+        return redirect()->route('index');
+    }
+
+    public function enable(Request $request)
+    {
+        $item = Item::find($request->keys()[0]);
+        $item->update(['ativo' => !$item->ativo]);
         return redirect()->route('index');
     }
 }

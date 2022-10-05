@@ -16,13 +16,17 @@
             </div>
         </div>
     @endif
+    @if($item)
+    <h5>Criando a partir de modelo</h5>
+    @endif
     <div class="container-fluid">
         <form method="POST" action="{{route('store')}}" class="row">
             @csrf
             <div class="col-12 col-md-6 mb-3">
                 <div class="auto-search-wrapper">
                     <label for="nome" class="form-label">Nome</label>
-                    <input type="text" id="nome" name="nome" class="form-control" autocomplete="off"/>
+                    <input type="text" id="nome" name="nome" class="form-control" value="{{$item ? $item->nome : ''}}"
+                           autocomplete="off"/>
                 </div>
             </div>
             <div class="col-12 col-md-6 mb-3">
@@ -33,19 +37,22 @@
             <div class="col-12 col-md-6 mb-3">
                 <div class="auto-search-wrapper">
                     <label for="marca" class="form-label">Marca</label>
-                    <input type="text" class="form-control" id="marca" name="marca" autocomplete="off" required>
+                    <input type="text" class="form-control" id="marca" name="marca" value="{{$item ? $item->marca : ''}}"
+                           autocomplete="off" required>
                 </div>
             </div>
             <div class="col-12 col-md-6 mb-3">
                 <div class="auto-search-wrapper">
                     <label for="categoria" class="form-label">Categoria</label>
-                    <input type="text" class="form-control" id="categoria" name="categoria" autocomplete="off" required>
+                    <input type="text" class="form-control" id="categoria" name="categoria"
+                           value="{{$item ? $item->categoria : ''}}" autocomplete="off" required>
                 </div>
             </div>
             <div class="col-12 col-md-6 mb-3">
                 <div class="auto-search-wrapper">
                     <label for="local" class="form-label">Local</label>
-                    <input type="text" class="form-control" id="local" name="local" autocomplete="off" >
+                    <input type="text" class="form-control" id="local" name="local" value="{{$item ? $item->local : ''}}"
+                           autocomplete="off" >
                 </div>
             </div>
             <div class="col-12 col-md-8 mb-3 mx-auto">

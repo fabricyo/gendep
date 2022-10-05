@@ -11,7 +11,7 @@
 
 @include('partials.header')
 
-<main class="container" style="margin-top: 5rem;">
+<main class="container" style="margin-top: 2rem;">
     @yield('content')
 </main>
 @include('partials.footer')

@@ -14,3 +14,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
     rel="stylesheet"
 />
+
+
+<link href="{{url('css/styles.css')}}" rel="stylesheet" />

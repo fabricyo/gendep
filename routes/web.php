@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [ItensController::class , 'index'])->name('index');
+Route::get('/inativos', [ItensController::class , 'inativos'])->name('inativos');
 Route::get('/create', [ItensController::class , 'create'])->name('create');
 Route::post('/store', [ItensController::class , 'store'])->name('store');
 Route::get('/destroy', [ItensController::class , 'destroy'])->name('destroy');
+Route::get('/enable', [ItensController::class , 'enable'])->name('enable');
 Route::get('/show', [ItensController::class , 'show'])->name('show');
 Route::get('/edit', [ItensController::class , 'edit'])->name('edit');
 Route::post('/update', [ItensController::class , 'update'])->name('update');

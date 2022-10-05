@@ -24,6 +24,7 @@ class CreateItensTable extends Migration
             $table->dateTime('saida')->nullable();
             $table->integer('qtd')->default(0);
             $table->date('validade');
+            $table->boolean('ativo')->default(1);
             $table->timestamps();
         });
 

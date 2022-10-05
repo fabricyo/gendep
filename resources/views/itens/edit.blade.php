@@ -64,6 +64,9 @@
             <div class="col-12 text-center mt-3">
                 <button type="submit" class="btn btn-success">Salvar alterações <i class="fa-solid fa-file-pen"></i></button>
             </div>
+            <div class="col-12 mt-5">
+                <a class="btn btn-danger" id="deleteBtn"><i class="fa-solid fa-times"></i> Apagar</a>
+            </div>
         </form>
     </div>
     <style>
@@ -81,4 +84,13 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.js"></script>
     <script src="{{url('js/barcodeScanner.js')}}"></script>
+    <script>
+        window.addEventListener('load', function(){
+            $("#deleteBtn").click(function(){
+                if (window.confirm("Deseja mesmo apagar o item?")) {
+                    document.location = "{{ route('destroy', $item->id) }}"
+                }
+            });
+        });
+    </script>
 @endsection

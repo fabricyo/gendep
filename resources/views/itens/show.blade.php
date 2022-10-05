@@ -1,16 +1,20 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="card text-center text-white">
-        <div class="card-header bg-info">Detalhes</div>
-        <div class="card-body bg-primary">
-            <h5 class="card-title">{{$item->nome}} ({{$item->qtd}})</h5>
-            <p class="card-text">{{$item->local}}</p>
+    <div class="card text-center border border-info shadow-4">
+        <div class="card-header bg-info text-white">Detalhes</div>
+        <div class="card-body">
+            <h5 class="card-title">{{$item->nome}} ({{$item->qtd}})
+                @if(!$item->ativo)
+                <br><span class="text-warning" style="font-size: 16px">(produto inativo)</span>
+                @endif
+            </h5>
+            <p class="card-text"><i class="fa-solid fa-boxes-stacked"></i> {{$item->local}}</p>
             <div class="row">
-                <div class="col-6 mb-3">
+                <div class="col-12 col-md-6 mb-3">
                     <i class="fa-solid fa-tag"></i> {{$item->marca}}
                 </div>
-                <div class="col-6 mb-3">
+                <div class="col-12 col-md-6 mb-3">
                     <i class="fa-solid fa-list"></i> {{$item->categoria}}
                 </div>
                 <div class="col-12 mb-3">
@@ -28,21 +32,28 @@
                 </div>
             </div>
         </div>
-        <div class="card-footer bg-secondary">
+        <div class="card-footer" style="background-color: #287f9c">
             <div class="row">
-                <div class="col-6 mb-3">
-                    <button type="button" class="btn btn-success btnModal" data-tipo="e"
+                <div class="col-6 col-md-3 mb-4 mt-2">
+                    <button type="button" class="btn text-white bg-green btnModal" data-tipo="e"
                             data-mdb-toggle="modal" data-mdb-target="#fluxoModal"><i class="fa-solid fa-right-to-bracket"></i> entrada</button>
                 </div>
-                <div class="col-6 mb-3">
-                    <button type="button" class="btn btn-info btnModal" data-tipo="s"
+                <div class="col-6 col-md-3 mb-4 mt-2">
+                    <button type="button" class="btn text-white bg-orange btnModal" data-tipo="s"
                             data-mdb-toggle="modal" data-mdb-target="#fluxoModal"><i class="fa-solid fa-right-from-bracket"></i> saída</button>
                 </div>
-                <div class="col-6 mb-3">
-                    <a class="btn btn-warning" href="{{ route('edit', $item->id) }}"><i class="fa-solid fa-pencil"></i> Editar</a>
+                <div class="col-6 col-md-2 mb-3 mt-2">
+                    <a class="btn btn-secondary" href="{{ route('edit', $item->id) }}"><i class="fa-solid fa-pencil"></i> Editar</a>
                 </div>
-                <div class="col-6 mb-3">
-                    <a class="btn btn-danger" id="deleteBtn"><i class="fa-solid fa-trash"></i> Apagar</a>
+                <div class="col-6 col-md-2 mb-3 mt-2">
+                    @if($item->ativo)
+                        <a class="btn btn-warning" id="enableBtn"><i class="fa-solid fa-exclamation-circle"></i> Inativar</a>
+                    @else
+                        <a class="btn btn-success" id="enableBtn"><i class="fa-solid fa-exclamation-circle"></i> Ativar</a>
+                    @endif
+                </div>
+                <div class="col-6 col-md-2 mb-3 mt-2 mx-auto">
+                    <a class="btn btn-secondary" href="{{ route('create', $item->id) }}"><i class="fa-solid fa-plus-square"></i> Copiar</a>
                 </div>
             </div>
         </div>
@@ -80,7 +91,8 @@
         @foreach($fluxo as $f)
             <tr>
                 <td>{{$f->qtd}}</td>
-                <td>{{$f->tipo == 0 ? 'Entrada' : 'Saida'}}</td>
+                <td>{!! $f->tipo == 0 ?
+                        '<i class="fa-solid fa-right-to-bracket"></i> Entrada' : '<i class="fa-solid fa-right-from-bracket"></i> Saida' !!}</td>
                 <td data-sort="{{$f->created_at}}">{{dateSwap($f->created_at)}}</td>
             </tr>
         @endforeach
@@ -98,9 +110,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/af-2.4.0/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/r-2.3.0/datatables.min.js"></script>
 
     <script>
-        $("#deleteBtn").click(function(){
-            if (window.confirm("Deseja mesmo apagar o item?")) {
-                document.location = "{{ route('destroy', $item->id) }}"
+        $("#enableBtn").click(function(){
+            if (window.confirm("Deseja mudar o estado o item?")) {
+                document.location = "{{ route('enable', $item->id) }}"
             }
         });
         let selected = 'e';

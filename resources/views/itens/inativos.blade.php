@@ -3,15 +3,9 @@
 @section('content')
     <div class="card border border-primary shadow-0 ">
         <div class="card-body">
-            <h5 class="card-title">Lista de produtos</h5>
-            <div class="row">
-                <div class="col-6 col-md-2 ms-auto">
-                    <a class="btn btn-success" href="{{route('create')}}">Adicionar <i class="fa-solid fa-plus"></i></a>
-                </div>
-            </div>
+            <h5 class="card-title">Lista de produtos inativos</h5>
         </div>
     </div>
-
 
     <div class="w-100 mt-5">
         <h6>Filtro por vencimento</h6>
